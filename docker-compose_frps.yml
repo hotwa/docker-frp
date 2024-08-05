@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+  ubuntu-finetune:
+    build: 
+      context: frp
+      dockerfile: Dockerfile
+      args:
+        CACHEBUST: 1
+        FRP_TYPE: "frps"
+    volumes:
+      - ./config:/etc/frp
+    container_name: frps
+    restart: unless-stopped
+    image: hotwa/frps:latest
+    shm_size: '2gb'
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 7500:7500
+      - 8080:8080
+      - 8443:8443
